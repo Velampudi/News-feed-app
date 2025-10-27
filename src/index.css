@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+.body-transition {
+  transition: background-color 0.25s, color 0.25s;
+}
+
