@@ -36,13 +36,11 @@ export default function App() {
       let url = "";
 
       if (search) {
-        url = `${API_URL}/search?q=${encodeURIComponent(
-          search
-        )}&lang=en&country=in&max=10&page=${page}&token=${API_KEY}`;
+        url = `${API_URL}/news?q=${encodeURIComponent(search)}&type=search`;
       } else {
-
-        url = `${API_URL}/top-headlines?category=${category}&lang=en&country=in&max=10&page=${page}&token=${API_KEY}`;
+        url = `${API_URL}/news?category=${category}`;
       }
+
 
       const res = await fetch(url);
       const data = await res.json();
