@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 VITE_NEWS_API_KEY=100bcbd689b4c8efb24fc5a0245d61bc
 VITE_API_URL=https://gnews.io/api/v4
+
+.vercel
