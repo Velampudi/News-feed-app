@@ -5,7 +5,7 @@ import SearchBar from "./components/SearchBar";
 import ThemeToggle from "./components/ThemeToggle";
 
 const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
-const API_URL = "https://news-proxy-server-mjn1f2gic-velampudi-s-projects.vercel.app";
+const API_URL = "https://news-proxy-server.vercel.app/";
 
 
 
