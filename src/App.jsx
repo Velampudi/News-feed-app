@@ -5,7 +5,8 @@ import SearchBar from "./components/SearchBar";
 import ThemeToggle from "./components/ThemeToggle";
 
 const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
-const API_URL = "https://news-proxy-server.vercel.app/";
+const API_URL ="https://news-proxy-server.vercel.app/api/news";
+;
 
 
 
@@ -27,19 +28,20 @@ export default function App() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetchNews();
-  }, [category]);
+  fetchNews(query, 1, category);
+}, [category]);
 
-async function fetchNews(search = "", page = 1, category = "general") {
+async function fetchNews(search = "", page = 1, selectedCategory = "general") {
   setLoading(true);
   setError("");
 
   try {
-    let url = "";
-    if (search) {
-      url = `${API_URL}?q=${encodeURIComponent(search)}&page=${page}`;
-    } else {
-      url = `${API_URL}?category=${category}&page=${page}`;
+    let url = `${API_URL}?page=${page}`;
+
+    if (search.trim()) {
+      url += `&q=${encodeURIComponent(search.trim())}`;
+    } else if (selectedCategory) {
+      url += `&category=${selectedCategory}`;
     }
 
     console.log("Fetching from URL:", url);
@@ -50,8 +52,7 @@ async function fetchNews(search = "", page = 1, category = "general") {
     const data = await res.json();
     if (!data.articles) throw new Error("No articles found");
 
-    if (page === 1) setArticles(data.articles);
-    else setArticles((prev) => [...prev, ...data.articles]);
+    setArticles(page === 1 ? data.articles : (prev) => [...prev, ...data.articles]);
   } catch (err) {
     console.error("Error:", err);
     setError(err.message);
@@ -59,6 +60,7 @@ async function fetchNews(search = "", page = 1, category = "general") {
     setLoading(false);
   }
 }
+
 
 
 
