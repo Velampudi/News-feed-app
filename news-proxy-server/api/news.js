@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // ✅ Handle preflight OPTIONS requests
+  // ✅ Handle preflight OPTIONS requests (important for CORS)
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     const category = req.query.category || "general";
     const page = req.query.page || 1;
 
-    // ✅ Fetch from GNews API using your API key from environment variable
+    // ✅ Use your GNews API key from environment variable
     const response = await fetch(
       `https://gnews.io/api/v4/top-headlines?category=${category}&page=${page}&lang=en&apikey=${process.env.GNEWS_API_KEY}`
     );
@@ -29,3 +29,4 @@ export default async function handler(req, res) {
     res.status(500).json({ error: "Failed to fetch news" });
   }
 }
+
