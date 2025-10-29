@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-  // ✅ Allow only your frontend and test URLs
   const allowedOrigins = [
     "https://appdost-assignment.netlify.app",
     "https://news-proxy-server.vercel.app",
@@ -14,7 +13,6 @@ export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-  // ✅ Handle preflight OPTIONS requests
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
